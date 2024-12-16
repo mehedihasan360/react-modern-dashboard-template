@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import Iconify from "../../config/IconifyConfig";
 
-const ErrorElement: React.FC = () => {
+const NotFound: React.FC = () => {
   const navigate: NavigateFunction = useNavigate();
   const error = useRouteError() as ErrorResponse;
 
@@ -55,4 +55,4 @@ const ErrorElement: React.FC = () => {
   );
 };
 
-export default React.memo(ErrorElement);
+export default React.memo(NotFound);

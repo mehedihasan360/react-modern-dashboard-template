@@ -1,8 +1,10 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import AuthHeader from "../components/AuthHeader";
 import AuthFooter from "../components/AuthFooter";
 import useBreakpoint from "../../../hooks/useBreakpoint";
+import { useAppDispatch, useAppSelector } from "../../../app/store";
+import { AuthState, clearMessage } from "../../../app/slice/authSlice";
 
 const HEADER_CONTENT = {
   "/auth/login": {
@@ -30,6 +32,8 @@ const HEADER_CONTENT = {
 const Auth: React.FC = () => {
   const { xl } = useBreakpoint();
   const { pathname } = useLocation();
+  const { message } = useAppSelector(AuthState);
+  const dispatch = useAppDispatch();
 
   const { title, description } = useMemo(
     () =>
@@ -39,6 +43,12 @@ const Auth: React.FC = () => {
       },
     [pathname]
   );
+
+  useEffect(() => {
+    if (!message) return;
+    const timer = setTimeout(() => dispatch(clearMessage()), 10000);
+    return () => clearTimeout(timer);
+  }, [message, dispatch]);
 
   return (
     <section style={{ display: "grid", placeItems: "center", height: "100vh" }}>

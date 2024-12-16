@@ -4,7 +4,7 @@ export type LoginTypes = {
   remember: boolean;
 };
 
-export type ForgotPassword = Partial<{
+export type ForgotPasswordTypes = Partial<{
   otp: string;
   token: string;
   email: string;

@@ -23,7 +23,7 @@ interface ColProps {
 interface CustomUploadProps extends UploadProps {
   accept?: AcceptType;
   listType?: ListType;
-  maxSize?: number; // File size in MB
+  maxSize?: number;
 }
 
 interface CommonFormItemProps<T> extends Omit<FormItemProps, "name"> {
@@ -52,7 +52,7 @@ function FormItemUpload<T extends Record<string, unknown>>({
 
     if (!isLtMaxSize) {
       setError(
-        `The selected file exceeds the maximum allowed size of ${maxSize} MB. Please choose a smaller file.`
+        `File size must be less than ${maxSize} MB. Please select a smaller file.`
       );
       return Upload.LIST_IGNORE;
     }
